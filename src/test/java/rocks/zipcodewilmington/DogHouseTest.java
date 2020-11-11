@@ -1,8 +1,11 @@
 package rocks.zipcodewilmington;
 
+import org.junit.Assert;
 import org.junit.Test;
+import rocks.zipcodewilmington.animals.Cat;
 import rocks.zipcodewilmington.animals.Dog;
 import rocks.zipcodewilmington.animals.animal_creation.AnimalFactory;
+import rocks.zipcodewilmington.animals.animal_storage.CatHouse;
 import rocks.zipcodewilmington.animals.animal_storage.DogHouse;
 
 import java.util.Date;
@@ -31,4 +34,72 @@ public class DogHouseTest {
         // Then
         DogHouse.getNumberOfDogs();
     }
+
+    @Test
+    public void addTest() {
+        // given
+        DogHouse.clear();
+
+        String name = "Roxy";
+        Date birthday = new Date();
+
+        Dog dog = AnimalFactory.createDog(name, birthday);
+        DogHouse.add(dog);
+
+        String expected = dog.getName();
+        String actual = DogHouse.getDogById(dog.getId()).getName();
+
+        Assert.assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void removeTest() {
+        DogHouse.clear();
+
+        Dog roxy = AnimalFactory.createDog("Roxy", new Date());
+        DogHouse.remove(roxy);
+
+        Integer expected = roxy.getId();
+        Integer actual = DogHouse.getNumberOfDogs();
+
+        Assert.assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void getDogsByIdTest() {
+        DogHouse.clear();
+
+        Dog roxy = AnimalFactory.createDog("Roxy", new Date());
+        DogHouse.remove(roxy);
+
+        Integer expected = roxy.getId();
+        Integer actual = DogHouse.getNumberOfDogs();
+
+        Assert.assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void getNumberOfCatsTest() {
+
+        Dog dog = new Dog("", new Date(), 0);
+
+
+        int numberOfDogsBeforeAdd = DogHouse.getNumberOfDogs();
+
+
+        int expected = numberOfDogsBeforeAdd + 1;
+
+
+        DogHouse.add(dog);
+
+        int actual = DogHouse.getNumberOfDogs();
+
+        Assert.assertEquals(expected, actual);
+
+
+    }
+
 }

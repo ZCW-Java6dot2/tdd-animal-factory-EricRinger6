@@ -3,6 +3,7 @@ package rocks.zipcodewilmington;
 import org.junit.Assert;
 import org.junit.Test;
 import rocks.zipcodewilmington.animals.Dog;
+import rocks.zipcodewilmington.animals.Cat;
 import rocks.zipcodewilmington.animals.animal_creation.AnimalFactory;
 
 import java.util.Date;
@@ -35,4 +36,19 @@ public class AnimalFactoryTest {
     }
 
     //TODO - Create Test for `Animal createCat(String name, Date birthDate)`
+    @Test
+    public void createCatTest(){
+        String name = "Mochi";
+        Date birthday = new Date();
+
+        Cat cat = AnimalFactory.createCat(name, birthday);
+
+        String expectedName = cat.getName();
+        Date expectedDate = cat.getBirthDate();
+
+        Assert.assertEquals(expectedName, name);
+        Assert.assertEquals(expectedDate, birthday);
+
+    }
+
 }
